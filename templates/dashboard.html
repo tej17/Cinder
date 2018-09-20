@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="static/main.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="stylesheet" type="text/css" href="static/welcome.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title></title>
+	<style type="text/css">
+
+		.imagedecor{
+
+			height: 400px;
+			width: auto;
+			margin-left: 0%;
+			margin-top: 3%;
+
+		}
+
+		.container{max-width:1170px; margin:auto;}
+		
+		.inbox_people {
+		  background: #f8f8f8 none repeat scroll 0 0;
+		  float: left;
+		  overflow: hidden;
+		  width: 40%; border-right:1px solid #c4c4c4;
+		}
+		.inbox_msg {
+		  border: 1px solid #c4c4c4;
+		  clear: both;
+		  overflow: hidden;
+		}
+		.top_spac{ margin: 20px 0 0;}
+
+
+		.recent_heading {float: left; width:40%;}
+		.srch_bar {
+		  display: inline-block;
+		  text-align: right;
+		  width: 60%; padding:
+		}
+		.headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;}
+
+		.recent_heading h4 {
+		  color: #05728f;
+		  font-size: 21px;
+		  margin: auto;
+		}
+		.srch_bar input{ border:1px solid #cdcdcd; border-width:0 0 1px 0; width:80%; padding:2px 0 4px 6px; background:none;}
+		.srch_bar .input-group-addon button {
+		  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+		  border: medium none;
+		  padding: 0;
+		  color: #707070;
+		  font-size: 18px;
+		}
+		.srch_bar .input-group-addon { margin: 0 0 0 -27px;}
+
+		.chat_ib h5{ font-size:15px; color:#464646; margin:0 0 8px 0; padding-left: 45px;}
+		.chat_ib p{ font-size:14px; color:#989898; margin:auto; padding-left: 45px;}
+		.chat_img {
+		  float: left;
+		  width: 11%;
+		}
+		.chat_ib {
+
+		  float: left;
+		  padding-left: 120px;
+		  padding: 0 0 0 15px;
+		  width: 88%;
+		}
+
+		.chat_people{ overflow:hidden; clear:both;}
+		.chat_list {
+		  border-bottom: 1px solid #c4c4c4;
+		  margin: 0;
+		  padding: 18px 16px 10px;
+		}
+		.inbox_chat { height: 100px;}
+
+		.active_chat{ background:#ebebeb;}
+
+		.incoming_msg_img {
+		  display: inline-block;
+		  width: 6%;
+		}
+		.received_msg {
+		  display: inline-block;
+		  padding: 0 0 0 10px;
+		  vertical-align: top;
+		  width: 92%;
+		 }
+		 .received_withd_msg p {
+		  background: #ebebeb none repeat scroll 0 0;
+		  border-radius: 3px;
+		  color: #646464;
+		  font-size: 14px;
+		  margin: 0;
+		  padding: 5px 10px 5px 12px;
+		  width: 100%;
+		}
+		.time_date {
+		  color: #747474;
+		  display: block;
+		  font-size: 12px;
+		  margin: 8px 0 0;
+		}
+		.received_withd_msg { width: 57%;}
+		.mesgs {
+		  float: left;
+		  padding: 30px 15px 0 25px;
+		  width: 60%;
+		}
+
+		 .sent_msg p {
+		  background: #05728f none repeat scroll 0 0;
+		  border-radius: 3px;
+		  font-size: 14px;
+		  margin: 0; color:#fff;
+		  padding: 5px 10px 5px 12px;
+		  width:100%;
+		}
+		.outgoing_msg{ overflow:hidden; margin:26px 0 26px;}
+		.sent_msg {
+		  float: right;
+		  width: 46%;
+		}
+		.input_msg_write input {
+		  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+		  border: medium none;
+		  color: #4c4c4c;
+		  font-size: 15px;
+		  min-height: 48px;
+		  width: 100%;
+		}
+
+		.type_msg {border-top: 1px solid #c4c4c4;position: relative;}
+		.msg_send_btn {
+		  background: #05728f none repeat scroll 0 0;
+		  border: medium none;
+		  border-radius: 50%;
+		  color: #fff;
+		  cursor: pointer;
+		  font-size: 17px;
+		  height: 33px;
+		  position: absolute;
+		  right: 0;
+		  top: 11px;
+		  width: 33px;
+		}
+		.messaging { padding: 0 0 50px 0;}
+		.msg_history {
+		  height: 516px;
+		  overflow-y: auto;
+		}
+
+	</style>
+</head>
+<body onload="insertList();">
+	<nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Cinder</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">About Us</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-user" hidden></span> My Matches</a></li>
+          <li><a href="/login"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div style="width: 100%; margin-top: -20px;" id="wrapper">
+    	<!-- <div style="float: left; width: 50%;" id="first"> -->
+    		<!-- Displaying the list of opposite genders -->	
+    	<!-- </div>  -->
+
+    	<div class="inbox_people" id="leftparent">
+          <div class="headind_srch" style="background-color: #1b700e; height: 50px;">
+            <div class="recent_heading">
+              <h4 style="color: white; vertical-align: middle;"> <b>CINDER</b> </h4>
+            </div>
+            <div class="srch_bar">
+              <!-- <div class="stylish-input-group">
+                <input type="text" class="search-bar" placeholder="Search" >
+              </div> -->
+            </div>
+          </div>
+          <!-- <div class="inbox_chat">
+            <div class="chat_list active_chat">
+              <div class="chat_people">
+                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                <div class="chat_ib">
+                  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                  <p>Test, which is a new approach to have all solutions 
+                    astrology under one roof.</p>
+                </div>
+              </div>
+            </div>
+          </div>-->
+        </div>
+
+
+
+
+
+
+    	<div style="float: right; width: 50%;" id="second">
+    		<form action="/OneSide" method="post" id="oneside">
+	    		<table>
+	    			<tr><img src="" id="img"></tr>
+	    			<tr><div id="dynamic-description"></div></tr>
+	    			<tr>
+	    				<p><span id="remove"></span></p>
+	    				<p><span id="like" onclick="SubmitForm();"></span></p>
+	    			</tr>
+	    			<p id="data" >{{ currentlogin }}</p>
+	    		</table>
+    		</form>
+    	</div>
+    </div>
+    
+    <script type="text/javascript">
+
+    	x = [];
+		x = {{ users | tojson | safe }};
+		var image = document.getElementById('img');
+		var descrpt = document.getElementById('dynamic-description');
+		document.getElementById('data').innerHTML = x;
+
+		var glyphicon1 = document.getElementById('remove');
+		var glyphicon2 = document.getElementById('like');
+    	var imageIndex = 0;
+
+    	var rows = x.length;
+    	var martop = 20;
+    	
+    	var parentdiv = document.getElementById('leftparent');
+
+    	function insertList()
+    	{
+    		for(var i=0;i<rows;i++)
+    		{
+    			var div1 = document.createElement('div');
+    			var div2 = document.createElement('div');
+    			var div3 = document.createElement('div');
+    			var div4 = document.createElement('div');
+    			var div5 = document.createElement('div');
+    			var img = document.createElement('img');
+    			var name = document.createElement('h5');
+    			var desc = document.createElement('p');
+
+				div1.setAttribute("class","inbox_chat");
+
+				div2.setAttribute("class","chat_list");
+
+				div3.setAttribute("class","chat_people");
+
+				div4.setAttribute("class","chat_img");
+
+				div5.setAttribute("class","chat_ib");
+
+				img.setAttribute("src",x[i][4]);
+				img.setAttribute("id",i);
+				img.setAttribute("style","max-width: 100px; border-radius: 50%;")
+				img.setAttribute("onclick","insertImage(id)");
+
+				name.innerHTML = x[i][1];
+
+				desc.innerHTML = x[i][7];
+
+				div5.appendChild(name);
+				div5.appendChild(desc);
+
+				div4.appendChild(img);
+
+				div3.appendChild(div4);
+				div3.appendChild(div5);
+
+				div2.appendChild(div3);
+
+				div1.appendChild(div2); 
+
+				parentdiv.appendChild(div1);   			
+
+    		}
+    	}
+
+
+    	function insertImage(id)
+    	{
+    		var mydiv = document.getElementById('second');
+    		var heart = document.getElementById('heart');
+    		var imageIndex = id;
+    		next = (id+1)%rows;
+    		console.log(id);
+    		console.log(rows);
+    		console.log(next);
+
+    		image.setAttribute("src",x[id][4]);
+    		image.setAttribute("class","imagedecor");
+
+    		descrpt.innerHTML = x[id][7].toString();
+    		descrpt.setAttribute("style","padding-left: 30%;");
+
+    		glyphicon1.setAttribute("class","glyphicon glyphicon-remove");
+    		glyphicon1.setAttribute("style","float: left;")
+    		glyphicon1.setAttribute("onclick","insertImage(next)");
+
+    		glyphicon2.setAttribute("class","glyphicon glyphicon-heart");
+    		//document.getElementById('heart').visibility = 'visible';
+    		glyphicon2.setAttribute("style","margin-left: 30%;");
+
+
+
+
+
+		}
+
+		function SubmitForm()
+		{
+			document.getElementById("oneside").submit();
+		}
+
+    </script>
+</body>
+</html>

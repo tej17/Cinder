@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+    <link href="static/main.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="stylesheet" type="text/css" href="static/welcome.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+  <body id="bg" style="background-image: url('/static/bgimg.jpeg'); background-size: 100%; background-repeat: no-repeat;">
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Cinder</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">About Us</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/reg"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+      </div>
+    </nav>
+
+
+    <form action="/dashboard" method="POST">
+      <div class="container" style="height: 55%; width: 35%; margin-top: 15%; margin-left: 57%; opacity: 0.8; border: 2px solid; border-radius: 10px;">
+        <p>LOG IN</p>
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Username" name="username" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" required>
+
+        <button type="submit" class="registerbtn">LOGIN</button>
+      </div>
+    </form>
+
+    <script type="text/javascript">
+      var i = 0;
+      function doSlideShow()
+      {
+        var arr = ["/static/bgimg.jpeg","/static/bgimg1.jpeg","/static/bgimg2.jpeg"];
+        var index = Math.floor((Math.random()*2)+1);
+        document.getElementById("bg").style.backgroundImage = "url("+arr[(++i)%3].toString()+")";
+      }
+
+      setInterval(doSlideShow, 5000);
+    </script>
+
+
+  </body>
+</html>
