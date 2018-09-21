@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<table border="2px black">
+		{% for user in match %}
+		<tr>
+			<td>{{ user[1] }}</td>
+			<td>{{ user[2] }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+</body>
+</html>

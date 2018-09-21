@@ -1,4 +1,5 @@
 import os
+import ast
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 from werkzeug.utils import secure_filename
 import models as dbHandler
@@ -18,12 +19,43 @@ def login():
 	print("Login Loaded")
 	return render_template('index.html')
 
-"""
+@app.route('/showMatch',methods = ['POST','GET'])
+def showMatches():
+	if request.method == 'POST':
+		print("SHOW MATCHES")
+		username = request.form['liker'] 
+		print(username)
+		matches = dbHandler.retrieveMatches(username)
+		print(matches)
+		return render_template("matches.html",match = matches)
+
+
+
 @app.route('/OneSided', methods=['POST','GET'])
 def makematch():
 	print("OneSided");
+	print(request.method)
 	if request.method == 'POST':
-"""
+		liker = request.form['current-username']
+		liked = request.form['liked-person']
+		pagedata = request.form['pagedata']
+		print(type(pagedata))
+		data = list(ast.literal_eval(pagedata))
+		count1 = dbHandler.checkMatch(liked,liker)
+		if count1[0][0]>=1:
+			dbHandler.insertMatch(liker,liked)
+			return render_template("dashboard.html",users = data, currentlogin = liker) 
+		count2 = dbHandler.checkMatch(liker,liked)
+		count3 = dbHandler.checkOneSided(liker,liked)
+		if count2[0][0]>=1 or count3[0][0]>=1:
+			print("Already Matched")
+			return render_template("dashboard.html",users = data, currentlogin = liker)
+		else:
+			dbHandler.insertOnesidedLikes(liker,liked)
+			return render_template("dashboard.html",users = data, currentlogin = liker)
+	else:
+		return render_template("dashboard.html",users = data, currentlogin = liker)
+
 
 @app.route('/dashboard', methods=['POST', 'GET'])
 def home():
@@ -31,11 +63,11 @@ def home():
 		username = request.form['username']
 		password = request.form['password']
 		count = dbHandler.checkUser(username,password)
-		if count[0][0]>=1:
-			print("USER EXISTS")			
+		if count[0][0]>=1:			
 			users = dbHandler.findGender(username)
 			gender = users[0][0]
 			data = dbHandler.retrieveUserDetails(gender)
+			print(type(data))
 			if username == "admin":
 				return render_template('admin.html', users = data)
 			return render_template('dashboard.html',users = data,currentlogin = username)

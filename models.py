@@ -47,3 +47,44 @@ def findGender(username):
 	users = cur.fetchall()
 	con.close()
 	return users
+
+def checkMatch(liker,victim):
+	con = sql.connect("flaskr.db")
+	cur = con.cursor()
+	cur.execute("SELECT COUNT(*) from matches where (groom = ? AND bride = ?) OR (bride = ? AND groom = ?)",(liker,victim,victim,liker,))
+	users = cur.fetchall()
+	con.close()
+	return users
+
+def insertMatch(liker,liked):
+	con = sql.connect("flaskr.db")
+	cur = con.cursor()
+	cur.execute("INSERT into matches (groom,bride) VALUES (?,?)",(liker,liked,))
+	users = cur.fetchall()
+	con.commit()
+	con.close()
+
+def checkOneSided(liker,liked):
+	con = sql.connect("flaskr.db")
+	cur = con.cursor()
+	cur.execute("SELECT COUNT(*) from onesided where likedby = ? AND liked = ?",(liker,liked,))
+	users = cur.fetchall()
+	con.close()
+	return users
+
+
+def insertOnesidedLikes(liker,victim):
+	con = sql.connect("flaskr.db")
+	cur = con.cursor()
+	cur.execute("INSERT into onesided (likedby,liked) VALUES(?,?)",(liker,victim,))
+	users = cur.fetchall()
+	con.commit()
+	con.close()
+
+def retrieveMatches(liker):
+	con = sql.connect("flaskr.db")
+	cur = con.cursor()
+	cur.execute("SELECT * from onesided where likedby = ?",(liker,))
+	users = cur.fetchall()
+	con.close()	
+	return users
