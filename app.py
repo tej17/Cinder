@@ -16,7 +16,7 @@ def allowed_file(filename):
 
 @app.route('/')
 def index():
-	return 'OK'
+	return render_template('index.html')
 
 
 @app.route('/login')
